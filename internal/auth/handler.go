@@ -76,26 +76,20 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AuthHandler) Dashboard(w http.ResponseWriter, r *http.Request) {
-	// This would typically check for authentication tokens
-	// For simplicity, we'll just serve a simple HTML response
+	// Parse templates with inheritance
+	tmpl, err := template.ParseFiles(
+		"templates/layout.html",
+		"templates/dashboard.html",
+	)
+	if err != nil {
+		http.Error(w, "Şablon yüklənə bilmədi: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-	w.Header().Set("Content-Type", "text/html")
-	w.Write([]byte(`
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title>Dashboard</title>
-		<style>
-			body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-			.message { padding: 20px; background-color: #f8f9fa; border-radius: 5px; }
-		</style>
-	</head>
-	<body>
-		<div class="message">
-			<h1>Xoş gəlmisiniz!</h1>
-			<p>Sistemə uğurla <strong>daxil oldunuz</strong>.</p>
-		</div>
-	</body>
-	</html>
-	`))
+	// Execute template with layout
+	err = tmpl.ExecuteTemplate(w, "layout.html", nil)
+	if err != nil {
+		http.Error(w, "Şablon göstərilə bilmədi: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
