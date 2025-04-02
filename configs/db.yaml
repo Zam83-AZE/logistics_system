@@ -4,3 +4,5 @@ user: postgres
 password: postgres
 dbname: logistics_system
 sslmode: disable
+# configs/db.yaml
+connection_string: "postgresql://autvho:xau_m6JiCcLX4Nx4LCzp8etopeIdlyeApmRn@eu-central-1.sql.xata.sh/kargo:main?sslmode=require"
