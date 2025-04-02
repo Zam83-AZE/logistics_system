@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        {{if .UserName}}
+        <header class="main-header">
+            <div class="logo">
+                <img src="/static/images/logo.png" alt="Logo">
+                <h1>Logistics System</h1>
+            </div>
+            <div class="user-info">
+                <span>{{.UserName}}</span>
+                <a href="/logout" class="logout-btn">Çıxış</a>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li class="{{if eq .CurrentPage "dashboard"}}active{{end}}">
+                            <a href="/dashboard">Dashboard</a>
+                        </li>
+                        <!-- Digər bölmələr burada ola bilər -->
+                    </ul>
+                </nav>
+            </aside>
+            <main class="content">
+                {{template "content" .}}
+            </main>
+        </div>
+        {{else}}
+        <main class="content full-width">
+            {{template "content" .}}
+        </main>
+        {{end}}
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

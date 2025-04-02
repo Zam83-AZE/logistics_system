@@ -1,0 +1,10 @@
+app:
+  name: Logistics System
+  version: 1.0.0
+  environment: development
+  port: 8080
+  timeout:
+    server: 15s
+    read: 15s
+    write: 15s
+    idle: 60s

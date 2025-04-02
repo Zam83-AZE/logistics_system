@@ -1,0 +1,60 @@
+{{define "content"}}
+<div class="dashboard-container">
+    <h2 class="section-title">Dashboard</h2>
+    
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-icon users-icon"></div>
+            <div class="stat-info">
+                <h3>Müştərilər</h3>
+                <p class="stat-number">{{.Summary.TotalCustomers}}</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon containers-icon"></div>
+            <div class="stat-info">
+                <h3>Konteynerlər</h3>
+                <p class="stat-number">{{.Summary.TotalContainers}}</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon shipments-icon"></div>
+            <div class="stat-info">
+                <h3>Aktiv daşınmalar</h3>
+                <p class="stat-number">{{.Summary.ActiveShipments}}</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon invoices-icon"></div>
+            <div class="stat-info">
+                <h3>Gözləyən fakturalar</h3>
+                <p class="stat-number">{{.Summary.PendingInvoices}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-panels">
+        <div class="panel recent-activity">
+            <h3 class="panel-title">Son fəaliyyətlər</h3>
+            <div class="panel-content">
+                <p>Hələlik məlumat mövcud deyil</p>
+            </div>
+        </div>
+        
+        <div class="panel quick-actions">
+            <h3 class="panel-title">Tez əməliyyatlar</h3>
+            <div class="panel-content">
+                <div class="quick-actions-btns">
+                    <button class="action-btn" disabled>Yeni müştəri</button>
+                    <button class="action-btn" disabled>Yeni konteyner</button>
+                    <button class="action-btn" disabled>Yeni daşınma</button>
+                    <button class="action-btn" disabled>Yeni faktura</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
