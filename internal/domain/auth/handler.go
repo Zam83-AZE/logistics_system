@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
 
 	"html/template"
@@ -26,6 +27,7 @@ func NewHandler(service Service, tmpl *template.Template, sessionManager *sessio
 
 // LoginPage login səhifəsini göstərir
 func (h *Handler) LoginPage(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("LoginPage handler çağırıldı")
 	// Əgər istifadəçi artıq giriş edibsə, dashboard-a yönləndir
 	if h.sessionManager.IsAuthenticated(r) {
 		http.Redirect(w, r, "/dashboard", http.StatusFound)
@@ -33,7 +35,9 @@ func (h *Handler) LoginPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := LoginForm{}
-	h.tmpl.ExecuteTemplate(w, "auth/login.html", data)
+	fmt.Println("222")
+	h.tmpl.ExecuteTemplate(w, "login.html", data)
+
 }
 
 // Login giriş əməliyyatını icra edir
@@ -55,7 +59,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 			Username: username,
 			Error:    err.Error(),
 		}
-		h.tmpl.ExecuteTemplate(w, "auth/login.html", data)
+		h.tmpl.ExecuteTemplate(w, "login.html", data)
 		return
 	}
 
@@ -66,12 +70,13 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 			Username: username,
 			Error:    "Giriş zamanı xəta baş verdi",
 		}
-		h.tmpl.ExecuteTemplate(w, "auth/login.html", data)
+		h.tmpl.ExecuteTemplate(w, "login.html", data)
 		return
 	}
 
 	// Dashboard səhifəsinə yönləndir
 	http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+
 }
 
 // Logout çıxış əməliyyatını icra edir

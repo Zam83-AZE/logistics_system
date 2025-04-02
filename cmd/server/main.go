@@ -39,11 +39,36 @@ func main() {
 	store := sessions.NewCookieStore([]byte("logistics-system-secret-key"))
 	sessionManager := session.NewManager(store)
 
+	// // Mütləq yol istifadə edin
+	// wd, err := os.Getwd()
+	// fmt.Println("Cari işçi qovluq:", wd)
+
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// staticDir := filepath.Join(wd, "web", "static")
+	// fmt.Println("staticDir qovluq:", staticDir)
+
+	// router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
+
 	// Statik faylların təqdim edilməsi
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./web/static"))))
 
+	// tmplFiles, _ := filepath.Glob("web/templates/**/*.html")
+	// if len(tmplFiles) == 0 {
+	// 	log.Fatal("Heç bir şablon faylı tapılmadı!")
+	// }
+	// fmt.Println("Tapılan şablonlar:", tmplFiles)
+
 	// Şablonların emalı
 	tmpl, err := template.ParseGlob("web/templates/**/*.html")
+	//tmpl := template.New("templates")
+	// Hər bir şablonu açıq şəkildə yükləyin
+	// _, err = tmpl.ParseFiles(
+	// 	filepath.Join(wd, "web", "templates", "layout.html"),
+	// 	filepath.Join(wd, "web", "templates", "auth", "login.html"),
+	// 	filepath.Join(wd, "web", "templates", "dashboard", "index.html"),
+	// )
 	if err != nil {
 		log.WithError(err).Fatal("Şablonların emalı zamanı xəta")
 	}
